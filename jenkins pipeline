@@ -3,17 +3,17 @@ pipeline {
     stages {
         stage ('stage-1') {
             steps {
-                sh "touch file2"
+                sh "touch file3"
             }
         }
         stage ('stage-2') {
             steps {
-                sh 'echo "hello evryone my name is pandurang" >file2'
+                sh 'echo "hello evryone my name is pandurang" >file3'
             }
         }
         stage ('stage-3') {
             steps {
-                sh 'mkdir jenkins'
+                sh 'mkdir jenkins3'
             }
         }
         stage ('stage-4') {
@@ -31,7 +31,7 @@ pipeline {
         }
         stage('git') {
             steps {
-                git "https://github.com/pandurang6662/my-project.git"
+                git 'https://github.com/pandurang6662/one.git'
             }
         }
     }
