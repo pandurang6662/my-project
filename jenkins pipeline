@@ -1,0 +1,38 @@
+pipeline {
+    agent any 
+    stages {
+        stage ('stage-1') {
+            steps {
+                sh "touch file2"
+            }
+        }
+        stage ('stage-2') {
+            steps {
+                sh 'echo "hello evryone my name is pandurang" >file2'
+            }
+        }
+        stage ('stage-3') {
+            steps {
+                sh 'mkdir jenkins'
+            }
+        }
+        stage ('stage-4') {
+            steps {
+                sh 'cp file2 jenkins'
+            }
+        }
+        stage ('stage-5') {
+            environment {
+                name = 'pandurang'
+            }
+            steps {
+                sh 'echo "my name is $name"'
+            }
+        }
+        stage('git') {
+            steps {
+                git "https://github.com/pandurang6662/my-project.git"
+            }
+        }
+    }
+}
