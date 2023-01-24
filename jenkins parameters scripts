@@ -1,0 +1,55 @@
+pipeline {
+    agent any 
+    parameters {
+        string(name:"aws", defaultValue:"AMAZON", description:"i am unsing aws cloud")
+        booleanParam(name:"jenkins", defaultValue:"true", description:"i am using in jenkins pipeline")
+        choice(name:"branch", choices: ["one","two","three"], description:"this is cp")
+    }
+    stages {
+        stage('stage-1') {
+            steps {
+                script {
+                    def abc = "${params.aws}"
+                    echo " hi my name is $abc"
+                }
+            }
+        }
+        stage ('stage-2') {
+            steps {
+                script {
+                    def abc = "${params.jenkins}"
+                    echo "hi my name is $abc"
+                }
+            }
+        }
+        stage('stage-3'){
+            steps {
+                script {
+                    def abc = "${params.branch}"
+                    echo "hi branch name is $abc"
+                    
+                }
+            }
+        }
+        stage('deploy'){
+            input {
+                message "can i deploy"
+                ok "yes uou can"
+            }
+            steps {
+                echo 'our code is deployed'
+            }
+        }
+    }
+    post {
+        always {
+            echo "this will gets printed anyway"
+        }
+        success {
+            echo " this will be printed if the build gets success"
+        }
+        failure {
+            echo " this will be printed ecen if the build gets failure"
+        }
+    }
+}
