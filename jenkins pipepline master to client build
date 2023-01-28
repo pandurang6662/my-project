@@ -1,0 +1,22 @@
+pipeline {
+    agent any 
+    stages {
+        stage('code') {
+            steps {
+                git 'https://github.com/pandurang6662/maven-web-app.git'
+            }
+        }
+        stage('build') {
+            steps {
+                sh 'mvn clean package'
+            }
+        }
+        stage('deploy') {
+            steps {
+                sshagent(['9bd732d7-fc32-4014-b1d9-770bb0e1ca70']) {
+                    sh 'scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/job-1/target/*.war  ec2-user@3.110.208.209:/opt/apache-tomcat-9.0.71/webapps/'
+                }
+            }
+        }
+    }
+}
