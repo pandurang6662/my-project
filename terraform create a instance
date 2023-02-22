@@ -1,0 +1,19 @@
+region = "ap-south-1"
+access_key = "AKIAZFK6KUTLCP4U6E5O"
+secret_key = "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"
+
+}
+
+resource  "aws_instance" "ashokit" {
+ami =  "ami-0f8ca728008ff5af4"
+availability_zone = "ap-south-1b"
+instance_type = "t2.micro"
+count = "4"
+tags = {
+Name = "web-server"
+Environment = "Dev"
+}
+root_block_device {
+volume_size = 10
+}
+}
